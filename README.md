@@ -71,3 +71,7 @@ render json: book.errors, status: :unprocessible_entity
 Validations have to put in the model.
 
 Docs: https://guides.rubyonrails.org/active_record_validations.html
+
+# rescue_from
+
+https://apidock.com/rails/ActiveSupport/Rescuable/ClassMethods/rescue_from
