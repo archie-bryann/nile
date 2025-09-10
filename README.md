@@ -54,39 +54,20 @@ rails routes | grep book
 render json: book, status: :created
 ```
 
-All status symbols: https://guides.rubyonrails.org/layouts_and_rendering.html?utm_source=chatgpt.com#the-status-option
+All status symbols:
 
-# To require certail fields for a route (ChatGPT)
+Official: https://guides.rubyonrails.org/layouts_and_rendering.html?utm_source=chatgpt.com#the-status-option
 
-1. Model-level validation (like Mongoose `required: true`)
+Unofficial: http://www.railsstatuscodes.com/
 
-```rb
-class Book < ApplicationRecord
-  validates :title, presence: true
-  validates :author, presence: true
-end
+# Adding Validations
 
-```
-
-2. Controller-level requirement (like request validation middleware in Express)
+In order for `books.errors` from the controller method to work as seen below:
 
 ```rb
-def create
-  book = Book.new(book_params)
-
-  if book.save
-    render json: book, status: :created
-  else
-    render json: book.errors, status: :unprocessable_entity
-  end
-end
-
-private
-
-def book_params
-  # Require :book, and also require that :title and :author are present inside
-  params.require(:book).require([:title, :author]).permit(:title, :author)
-end
+render json: book.errors, status: :unprocessible_entity
 ```
 
-3. Why both? This way, even if a request sneaks around the controller (say, a background job or a different API endpoint), the model still enforces the rules.
+Validations have to put in the model.
+
+Docs: https://guides.rubyonrails.org/active_record_validations.html
