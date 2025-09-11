@@ -5,8 +5,15 @@ module Api
       # rescue_from ActiveRecord::RecordNotDestroyed, with: :not_destroyed
 
       def index
-        render json: Book.all
+        books = Book.all
+
+        # render json: Book.all
+        render json: BooksRepresenter.new(books).as_json
       end
+      
+      # def show
+      #   render json: { id: book.id, title: book.title, author: book.author }
+      # end
 
       def create
         # some logic

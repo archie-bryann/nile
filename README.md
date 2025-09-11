@@ -4,13 +4,13 @@
 
 Run below in the terminal:
 
-```
+```bash
 rails new nile --api
 ```
 
 # Generate controller with rails scaffolding
 
-```
+```bash
 rails g controller BooksController index
 ```
 
@@ -18,13 +18,13 @@ rails g controller BooksController index
 
 1. Create model:
 
-```
+```bash
 rails g model Book title:string author:string
 ```
 
 2. Run the migrations
 
-```
+```bash
 rails db:migrate
 ```
 
@@ -32,19 +32,19 @@ rails db:migrate
 
 1. Run below to start a IRB session within the context of the rails application:
 
-```
+```bash
 rails c
 ```
 
 2. Run:
 
-```
+```bash
 Book.create!(author: 'tom', title: 'Rails API')
 ```
 
 # Search for a specific terms in routes
 
-```
+```bash
 rails routes | grep book
 ```
 
@@ -86,10 +86,48 @@ https://www.youtube.com/watch?v=u7TglqnXbDw&list=PLbTv9eGiI03u1-JFkFpPGsR_hMre6W
 
 To run test
 
-```
+```bash
 rspec
 ```
 
-```
+```bash
 bundle exec rspec spec/requests/books_spec.rb
 ```
+
+# For model associations
+
+1. Create a `author` model
+
+```bash
+rails g model Author first_name:string last_name:string age:integer
+```
+
+Then run migrations:
+
+```bash
+rails db:migrate
+```
+
+We need a foreign key id which references the other model:
+
+```bash
+rails g migration add_author_to_books author:references
+```
+
+This sets up that has_many...belongs_to references
+
+Then remove below from that migration file:
+
+```rb
+# # , null: false, foreign_key: true
+```
+
+Now, remove the previous author string field
+
+```bash
+rails g migration remove_author_from_books author:string
+```
+
+# Controller Representers
+
+Controllers representers are used for populating and pre-processing json response
