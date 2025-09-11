@@ -131,3 +131,17 @@ rails g migration remove_author_from_books author:string
 # Controller Representers
 
 Controllers representers are used for populating and pre-processing json response
+
+# Active Job for background jobs
+
+Generate a job:
+
+```bash
+rails g job update_sku
+```
+
+Call the job in the controller
+
+```rb
+UpdateSkuJob.perform_later(book_params[:title])
+```
