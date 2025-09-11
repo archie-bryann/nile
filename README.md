@@ -75,3 +75,21 @@ Docs: https://guides.rubyonrails.org/active_record_validations.html
 # rescue_from
 
 https://apidock.com/rails/ActiveSupport/Rescuable/ClassMethods/rescue_from
+
+# Rspec to run tests
+
+Guide:
+
+https://www.youtube.com/watch?v=-aO0TlPTHhA&list=PLbTv9eGiI03u1-JFkFpPGsR_hMre6WX3e&index=9
+
+https://www.youtube.com/watch?v=u7TglqnXbDw&list=PLbTv9eGiI03u1-JFkFpPGsR_hMre6WX3e&index=10
+
+To run test
+
+```
+rspec
+```
+
+```
+bundle exec rspec spec/requests/books_spec.rb
+```
