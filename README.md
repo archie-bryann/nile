@@ -145,3 +145,9 @@ Call the job in the controller
 ```rb
 UpdateSkuJob.perform_later(book_params[:title])
 ```
+
+# Generate a user model
+
+```
+rails g model User username:string
+```
