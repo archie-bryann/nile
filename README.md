@@ -176,3 +176,5 @@ user = User.first
 user.password = 'Password1'
 user.save!
 ```
+
+# HTTP Token Authentication

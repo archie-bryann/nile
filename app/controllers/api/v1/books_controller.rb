@@ -3,8 +3,12 @@ module Api
     class BooksController < ApplicationController
       # applies the rescue to every method in this controller
       # rescue_from ActiveRecord::RecordNotDestroyed, with: :not_destroyed
+      
+      include ActionController::HttpAuthentication::Token # to use _token_and_options
 
       MAX_PAGINATION_LIMIT = 100
+
+      before_action :authenticate_user, only: [:create, :destroy]
       
       def index
         # books = Book.all
@@ -59,6 +63,17 @@ module Api
 
 
       private
+
+      def authenticate_user
+        # Authorization: Bearer <token>
+        token, _options = token_and_options(request) # _options to ignore the second value
+        user_id = AuthenticationTokenService.decode(token)
+        User.find(user_id)
+      rescue ActiveRecord::RecordNotFound
+        render status: :unauthorized
+      rescue JWT::DecodeError
+        render status: :unauthorized # if token is invalid
+      end
 
       def limit # set a limit of max 100 i.e. <= 100
         [
