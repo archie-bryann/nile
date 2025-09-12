@@ -148,6 +148,31 @@ UpdateSkuJob.perform_later(book_params[:title])
 
 # Generate a user model
 
-```
+```bash
 rails g model User username:string
+```
+
+# Adding `password_digest` to the user model
+
+```bash
+rails g migration add_password_digest_to_user password_digest:string
+```
+
+Then add below in the user model:
+
+```ruby
+has_secure_password
+```
+
+# Create a user in rails console
+
+```bash
+rails c
+```
+
+```ruby
+User.create(username: 'BookSeller99')
+user = User.first
+user.password = 'Password1'
+user.save!
 ```
