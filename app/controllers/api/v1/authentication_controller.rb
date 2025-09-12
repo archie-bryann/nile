@@ -13,7 +13,7 @@ module Api
 
             # raise custom error if password is incorrect
             raise AuthenticationError unless user.authenticate(params.require(:password))
-            token = AuthenticationTokenService.call(user.id)
+            token = AuthenticationTokenService.encode(user.id)
 
             render json: { token: token }, status: :created
         end
